@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Application Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #0d485f;
+            color: white;
+            text-align: center;
+        }
+        form {
+            background-color: #073745;
+            padding: 20px;
+            border-radius: 10px;
+            width: 50%;
+            margin: auto;
+            text-align: left;
+        }
+        input, select {
+            margin: 5px;
+            padding: 8px;
+            width: 80%;
+            display: block;
+        }
+        .form-group {
+            margin-bottom: 10px;
+        }
+        .inline-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 10px;
+            background-color: orange;
+            border: none;
+            color: white;
+            cursor: pointer;
+        }
+        #output {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Application Form</h2>
+    <form id="appForm">
+        <div class="form-group">
+            First Name: <input type="text" id="firstName" required>
+        </div>
+        <div class="form-group">
+            Last Name: <input type="text" id="lastName" required>
+        </div>
+        <div class="form-group">
+            Date of Birth: <input type="date" id="dob" required>
+        </div>
+        <div class="form-group">
+            Age: <input type="number" id="age" readonly>
+        </div>
+        <div class="form-group">
+            Gender: 
+            <select id="gender">
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+            </select>
+        </div>
+        <div class="form-group">
+            Email Address: <input type="email" id="email" required>
+        </div>
+        
+        <div class="form-group">
+            <label>Positions Available:</label>
+            <div class="inline-group">
+                <input type="radio" name="position" value="Junior Developer"> Junior Developer
+                <input type="radio" name="position" value="Mid-level Developer"> Mid-level Developer
+                <input type="radio" name="position" value="Senior Developer"> Senior Developer
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label>Programming Languages:</label>
+            <div class="inline-group">
+                <input type="checkbox" name="language" value="Java"> Java
+                <input type="checkbox" name="language" value="JavaScript"> JavaScript
+                <input type="checkbox" name="language" value="Python"> Python
+            </div>
+        </div>
+        
+        <div class="form-group">
+            Password: <input type="password" id="password" required>
+        </div>
+        <div class="form-group">
+            Confirm Password: <input type="password" id="confirmPassword" required>
+        </div>
+        <button type="button" onclick="validateForm()">Submit</button>
+        <button type="reset">Reset</button>
+    </form>
+    <div id="output"></div>
+
+    <script>
+        function calculateAge() {
+            let dob = document.getElementById("dob").value;
+            let birthDate = new Date(dob);
+            let today = new Date();
+            let age = today.getFullYear() - birthDate.getFullYear();
+            let monthDiff = today.getMonth() - birthDate.getMonth();
+            if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+                age--;
+            }
+            document.getElementById("age").value = age;
+        }
+        document.getElementById("dob").addEventListener("change", calculateAge);
+
+        function validatePassword(password) {
+            return /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$/.test(password);
+        }
+
+        function validateForm() {
+            let firstName = document.getElementById("firstName").value;
+            let lastName = document.getElementById("lastName").value;
+            let age = document.getElementById("age").value;
+            let password = document.getElementById("password").value;
+            let confirmPassword = document.getElementById("confirmPassword").value;
+
+            if (age < 15 || age > 30) {
+                alert("Age must be between 15 and 30.");
+                return;
+            }
+            if (!validatePassword(password)) {
+                alert("Password must be at least 8 characters long and contain one uppercase letter, one lowercase letter, and one number.");
+                return;
+            }
+            if (password !== confirmPassword) {
+                alert("Passwords do not match.");
+                return;
+            }
+            alert("First Name: " + firstName + "\nLast Name: " + lastName);
+            document.getElementById("output").innerHTML = "First Name: " + firstName + "<br>Last Name: " + lastName;
+        }
+    </script>
+</body>
+</html>
