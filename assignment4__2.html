@@ -4,48 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Application Form</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #0d485f;
-            color: white;
-            text-align: center;
-        }
-        form {
-            background-color: #073745;
-            padding: 20px;
-            border-radius: 10px;
-            width: 50%;
-            margin: auto;
-            text-align: left;
-        }
-        input, select {
-            margin: 5px;
-            padding: 8px;
-            width: 80%;
-            display: block;
-        }
-        .form-group {
-            margin-bottom: 10px;
-        }
-        .inline-group {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-        button {
-            padding: 10px 20px;
-            margin: 10px;
-            background-color: orange;
-            border: none;
-            color: white;
-            cursor: pointer;
-        }
-        #output {
-            margin-top: 20px;
-            font-size: 18px;
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <h2>Application Form</h2>
@@ -103,46 +62,6 @@
     </form>
     <div id="output"></div>
 
-    <script>
-        function calculateAge() {
-            let dob = document.getElementById("dob").value;
-            let birthDate = new Date(dob);
-            let today = new Date();
-            let age = today.getFullYear() - birthDate.getFullYear();
-            let monthDiff = today.getMonth() - birthDate.getMonth();
-            if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
-                age--;
-            }
-            document.getElementById("age").value = age;
-        }
-        document.getElementById("dob").addEventListener("change", calculateAge);
-
-        function validatePassword(password) {
-            return /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$/.test(password);
-        }
-
-        function validateForm() {
-            let firstName = document.getElementById("firstName").value;
-            let lastName = document.getElementById("lastName").value;
-            let age = document.getElementById("age").value;
-            let password = document.getElementById("password").value;
-            let confirmPassword = document.getElementById("confirmPassword").value;
-
-            if (age < 15 || age > 30) {
-                alert("Age must be between 15 and 30.");
-                return;
-            }
-            if (!validatePassword(password)) {
-                alert("Password must be at least 8 characters long and contain one uppercase letter, one lowercase letter, and one number.");
-                return;
-            }
-            if (password !== confirmPassword) {
-                alert("Passwords do not match.");
-                return;
-            }
-            alert("First Name: " + firstName + "\nLast Name: " + lastName);
-            document.getElementById("output").innerHTML = "First Name: " + firstName + "<br>Last Name: " + lastName;
-        }
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
