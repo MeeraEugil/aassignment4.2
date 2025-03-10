@@ -1,0 +1,40 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #0c4c5a;
+    color: white;
+    text-align: center;
+}
+
+h2 {
+    margin-top: 20px;
+}
+
+form {
+    background-color: #06434e;
+    padding: 20px;
+    display: inline-block;
+    text-align: left;
+    border-radius: 10px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.inline-group input {
+    margin-left: 10px;
+}
+
+input, select {
+    padding: 5px;
+    margin-left: 10px;
+}
+
+button {
+    background-color: orange;
+    color: white;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    margin-top: 10px;
+}
